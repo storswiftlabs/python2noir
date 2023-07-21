@@ -136,6 +136,7 @@ class Lambda(Statement):
         return self.lambda_statement
 
 
+# HACK: move to function_pod
 class Closure(Statement):
     # {FN} {variate}{LEFT_PARENTHESIS}{inputs_dict}{RIGHT_PARENTHESIS} {RESULT} {res_type}{LEFT_BRACE} {exp} {RIGHT_BRACE}
     # fn bar(x: Field) -> Field { x + 1 }

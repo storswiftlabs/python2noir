@@ -25,6 +25,7 @@ ELSE = 'else'
 ELIF = f'{ELSE} {IF}'
 FN = 'fn'
 STRUCT = 'struct'
+IMPL = 'impl'
 INLINE = 'inline'
 
 # GET_TABLE_P_ONE = [FOR, IF, ELSE, ELIF, FN, STRUCT]
