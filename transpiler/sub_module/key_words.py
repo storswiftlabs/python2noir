@@ -9,12 +9,13 @@ IN = 'in'
 PUB = 'pub'
 PRINTLN = 'println'
 DEP_STD_PRINTLN = f'dep::std::{PRINTLN}'
+GLOBAL = 'global'
+SELF = 'self'
+T = 'T'
+N = 'N'
 
 # comptime variables
 COMPTIME = "comptime"
-
-GLOBAL = 'global'
-SELF = 'self'
 
 """
 "\t" number +1 key words

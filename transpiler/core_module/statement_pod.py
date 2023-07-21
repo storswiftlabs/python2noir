@@ -1,11 +1,8 @@
 from abc import ABC, abstractmethod
-from logging import getLogger
 
 from ..sub_module.key_words import ASSERT, LET, IF, ELSE, MUT, FN
 from ..sub_module.sign import LEFT_PARENTHESIS, RIGHT_PARENTHESIS, SEMICOLON, LEFT_BRACE, RIGHT_BRACE, POINT, COMMA, \
     RESULT
-
-log = getLogger(__name__)
 
 
 class Statement(ABC):
@@ -76,7 +73,8 @@ class Array(Statement):
     # Ternary expression
     # {LET} {variate} = {exp}{SEMICOLON}
     # let arr = [0, 1];
-    # XXX: 1 exp: str; 2 multi_type_check
+    # let arr: [Field; 2] = [0, 1];
+    # XXX: 1 exp: str; 2 multi_type_check; 3 is_define_type: add a arg
     def __init__(self, variate, exp, is_mut):
         self.variate = variate
         variate = str(variate)
