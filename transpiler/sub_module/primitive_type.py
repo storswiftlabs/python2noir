@@ -23,9 +23,9 @@ def custom_type(custom: str) -> str:
     """
 
     if custom[0] not in ['u', 'i']:
-        raise "Not a basic type of integer, signed certificate 'i', unsigned integer 'u'."
+        raise Exception("Not a basic type of integer, signed certificate 'i', unsigned integer 'u'.")
     if int(custom[1:]) not in list(range(1, 127)):
-        raise "The integer type cannot be less than 0 or more than 126."
+        raise Exception("The integer type cannot be less than 0 or more than 126.")
 
     return custom
 
