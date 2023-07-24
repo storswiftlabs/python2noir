@@ -10,8 +10,9 @@ Unt16 = 'u16'
 Unt32 = 'u32'
 Unt64 = 'u64'
 Unt126 = 'u126'
-FALSE = False
-TRUE = True
+BoolType = 'bool'
+FALSE = "false"
+TRUE = "true"
 FIELD = 'Field'
 
 
