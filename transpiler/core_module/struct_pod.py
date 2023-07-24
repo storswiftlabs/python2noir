@@ -1,3 +1,4 @@
+from .func_pod import Function, FunctionGenerics
 from ..sub_module.key_words import STRUCT, IMPL, T, N
 from ..sub_module.sign import LEFT_BRACE, RIGHT_BRACE, COLON, COMMA, LESS_THAN, GREATER_THAN
 from ..utils import log
@@ -24,9 +25,9 @@ class Struct:
         struct_fn_multi_lines += f"{RIGHT_BRACE}\n"
         return struct_fn_multi_lines
 
-    def generate_struct_fn(self) -> str:
-        # XXX: wait import function_pod
-        pass
+    def generate_struct_fn(self, fn_name: str, inputs_variate_and_type: dict, res: str, body: list) -> str:
+        fn_str = Function(fn_name, inputs_variate_and_type, res, body).get()
+        return fn_str
 
 
 class StructGenerics(Struct):
@@ -69,7 +70,5 @@ class StructGenerics(Struct):
         struct_fn_multi_lines += f"{RIGHT_BRACE}\n"
         return struct_fn_multi_lines
 
-    def generate_struct_fn(self) -> str:
-        # XXX: wait import function_pod
-        pass
-        return super().generate_struct_fn()
+    def generate_struct_fn(self, fn_name: str, inputs_variate_and_type: dict, res: str, body: list) -> str:
+        return super().generate_struct_fn(fn_name, inputs_variate_and_type, res, body)

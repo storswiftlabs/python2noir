@@ -5,6 +5,7 @@ from ..sub_module.sign import LEFT_PARENTHESIS, RIGHT_PARENTHESIS, SEMICOLON, LE
     RESULT, ASSIGNMENT, COLON
 from transpiler.core_module.struct_pod import Struct
 
+
 class Statement(ABC):
     """
     Code statement:The function body contains a set of statements that define the task the function performs.
@@ -52,7 +53,8 @@ class If_single_raw(Statement):
     # let (a, b) = if true { (0, 1) } else { (2, 3) };
     def __init__(self, variate, bool_exp, if_exp, else_exp):
         self.variate = variate
-        self.if_single_raw_statement = f"{LET} {variate} = {IF} {bool_exp} {LEFT_BRACE}{if_exp}{RIGHT_BRACE} {ELSE} {LEFT_BRACE}{else_exp}{RIGHT_BRACE}{SEMICOLON}"
+        self.if_single_raw_statement = f"{LET} {variate} = {IF} {bool_exp} {LEFT_BRACE}{if_exp}{RIGHT_BRACE} {ELSE} " \
+                                       f"{LEFT_BRACE}{else_exp}{RIGHT_BRACE}{SEMICOLON}"
 
     def get(self):
         return self.if_single_raw_statement
@@ -189,8 +191,7 @@ class Global(Statement):
 
     # 传入元组，或者数组
     def __init__(self, inputs: tuple):
-        self.global_variate = f"{GLOBAL} {inputs[0]} : {inputs[1]} = {inputs[2]}"
+        self.global_variate = f"{GLOBAL} {inputs[0]} : {inputs[1]} = {inputs[2]}{SEMICOLON}\n"
 
     def get(self):
         return self.global_variate
-
