@@ -1,9 +1,9 @@
 from abc import ABC, abstractmethod
 
-from ..sub_module.key_words import ASSERT, LET, IF, ELSE, MUT, FN
+from ..sub_module.key_words import ASSERT, LET, IF, ELSE, MUT, FN, GLOBAL
 from ..sub_module.sign import LEFT_PARENTHESIS, RIGHT_PARENTHESIS, SEMICOLON, LEFT_BRACE, RIGHT_BRACE, POINT, COMMA, \
-    RESULT
-
+    RESULT, ASSIGNMENT, COLON
+from transpiler.core_module.struct_pod import Struct
 
 class Statement(ABC):
     """
@@ -19,10 +19,13 @@ class Statement(ABC):
 class Let(Statement):
     # let statement: {let} {variate}: {variate_type} = {variate_body};
 
-    def __init__(self, variate, variate_type, variate_body):
+    def __init__(self, variate, variate_type, variate_body, is_mut: bool):
         # Get a line code statement
         self.variate = variate
-        self.let_statement = f"{LET} {variate}: {variate_type} = {variate_body};"
+        if is_mut:
+            self.let_mut_statement = f"{LET} mut {variate}: {variate_type} = {variate_body};"
+        else:
+            self.let_statement = f"{LET} {variate}: {variate_type} = {variate_body};"
 
     def get(self):
         # Get a line code statement
@@ -136,11 +139,58 @@ class Lambda(Statement):
 
 # HACK: move to function_pod
 class Closure(Statement):
-    # {FN} {variate}{LEFT_PARENTHESIS}{inputs_dict}{RIGHT_PARENTHESIS} {RESULT} {res_type}{LEFT_BRACE} {exp} {RIGHT_BRACE}
-    # fn bar(x: Field) -> Field { x + 1 }
+    # {FN} {variate}{LEFT_PARENTHESIS}{inputs_dict}{RIGHT_PARENTHESIS} {RESULT} {res_type}{LEFT_BRACE} {exp} {
+    # RIGHT_BRACE} fn bar(x: Field) -> Field { x + 1 }
     def __init__(self, variate, inputs_dict: dict, exp: list, res_type):
         self.closure_statement = f"{FN} {variate}{LEFT_PARENTHESIS}{inputs_dict}{RIGHT_PARENTHESIS} " \
                                  f"{RESULT} {res_type}{LEFT_BRACE} {exp} {RIGHT_BRACE}"
 
     def get(self):
         return self.closure_statement
+
+
+class Let_struct(Statement):
+    # let_struct statement: {let} {struct_name}
+    """
+    define:
+        1. let octopus = Animal {hands: 0,legs: 8,eyes: 2};
+    receive
+        1. let Animal { hands, legs, eyes } = get_octopus();
+        2. let octopus : Animal = get_octopus();
+    """
+
+    def __init__(self, struct: Struct, variate, body):
+        self.struct = struct
+        self.variate = variate
+        self.body = body
+
+    def get(self):
+        """
+        let octopus = Animal {hands: 0,legs: 8,eyes: 2};
+        """
+        struct = f"{LET} {self.variate} {ASSIGNMENT} {self.struct.struct_name} {LEFT_BRACE}"
+        for key, value in self.struct.name_and_type.items():
+            struct += f"{key}{COLON} {value}{COMMA}"
+        struct += f"{RIGHT_BRACE}{SEMICOLON}"
+        return struct
+
+    def get_for_variate(self):
+        """
+        let Animal { hands, legs, eyes } = get_octopus();
+        """
+        variate = []
+        for key, value in self.struct.name_and_type.items():
+            variate.append(key)
+        return f"{LET} {self.struct.struct_name} {LEFT_BRACE}{','.join(variate)}{RIGHT_BRACE} {ASSIGNMENT} " \
+               f"{self.body}{SEMICOLON}"
+
+
+class Global(Statement):
+
+    # 传入元组，或者数组
+    def __init__(self, inputs: tuple):
+        self.global_variate = f"{GLOBAL} {inputs[0]} : {inputs[1]} = {inputs[2]}"
+
+    def get(self):
+        return self.global_variate
+

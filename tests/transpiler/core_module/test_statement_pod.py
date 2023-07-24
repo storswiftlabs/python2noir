@@ -1,6 +1,7 @@
 import unittest
 
-from transpiler.core_module.statement_pod import Assert, If_single_raw, Tuple, Array, Lambda
+from transpiler.core_module.statement_pod import Assert, If_single_raw, Tuple, Array, Lambda, Global, Let_struct
+from transpiler.core_module.struct_pod import Struct
 
 
 class test_statement_pod(unittest.TestCase):
@@ -74,3 +75,17 @@ class test_statement_pod(unittest.TestCase):
         my_lambda = Array(variate, exp, not is_mut)
         print(my_lambda.get())
         assert "let some_closure = |x| 42 - x;" == my_lambda.get()
+
+    def test_global_variate(self):
+        inputs = ('N', 'Field', 5)
+        result = Global(inputs).get()
+        print(result)
+
+    def test_let_struct(self):
+        struct_name = 'Animal'
+        struct_input_name_and_type = {'hands': 2, 'legs': 3, 'eyes': 2}
+        struct = Struct(struct_name, struct_input_name_and_type)
+        result = Let_struct(struct, 'octopus', 'get_octopus()').get()
+        print(result)
+        result = Let_struct(struct, 'octopus', 'get_octopus()').get_for_variate()
+        print(result)
