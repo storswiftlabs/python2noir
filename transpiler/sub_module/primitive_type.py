@@ -1,5 +1,6 @@
 from .sign import LESS_THAN, GREATER_THAN
 
+# Primitive type
 Int8 = 'i8'
 Int16 = 'i16'
 Int32 = 'i32'
@@ -11,9 +12,17 @@ Uint32 = 'u32'
 Uint64 = 'u64'
 Uint126 = 'u126'
 BoolType = 'bool'
+FIELD = 'Field'
+
+PRIMITIVE_TYPE = [Int8, Int16, Int32, Int64, Int126, Uint8, Uint16, Uint32, Uint64, Uint126, BoolType, FIELD]
+# Generics
+T = 'T'
+N = 'N'
+GENERICS = [T, N]
+
+# Boolean values
 FALSE = "false"
 TRUE = "true"
-FIELD = 'Field'
 
 
 def custom_type(custom: str) -> str:
@@ -39,3 +48,17 @@ def set_str(str_len):
     """
 
     return f"str{LESS_THAN}{str_len}{GREATER_THAN}"
+
+
+def array_type(arr_type: str, arr_len: int or N) -> str:
+    """
+    Customer define array type
+    :param arr_type:
+    :param arr_len
+    :return: str for array type.
+    """
+
+    if arr_type not in PRIMITIVE_TYPE and arr_type not in GENERICS:
+        raise TypeError("Input \"type\" value is not a primitive type")
+
+    return f"[{arr_type}; {arr_len}]"

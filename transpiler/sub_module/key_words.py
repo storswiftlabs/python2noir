@@ -10,7 +10,7 @@ PUB = 'pub'
 PRINTLN = 'println'
 DEP_STD_PRINTLN = f'dep::std::{PRINTLN}'
 GLOBAL = 'global'
-SELF = 'self'
+SELF = 'Self'
 T = 'T'
 N = 'N'
 
