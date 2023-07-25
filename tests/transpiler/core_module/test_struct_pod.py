@@ -77,7 +77,7 @@ weight: u16,
 
     def test_impl_struct_fn(self):
         struct_name = "Dataset"
-        name_and_type = {"bar": FIELD, "baz": array_type(FIELD, N)}
+        name_and_type = {"bar": FIELD, "baz": array_type(FIELD, 3)}
         my_struct = Struct(struct_name, name_and_type)
         print("struct:\n", my_struct.generate_noir_struct())
         some_fn1 = my_struct.generate_struct_fn("some_fn1", {"self": SELF}, FIELD,

@@ -12,8 +12,6 @@ class If_control(Statement):
     def __init__(self, left_value, right_value, sign, body):
         self.left_value = left_value
         self.right_value = right_value
-        if sign == ASSIGNMENT:
-            raise "Conditional statements cannot be '='"
         self.sign = sign
         self.body = body
 

@@ -130,6 +130,7 @@ class Lambda(Statement):
     # let some_closure = |x| 42 - x;
     # XXX: lambda exp check
     def __init__(self, variate, exp, is_mut: bool):
+        self.variate = variate
         if is_mut:
             self.lambda_statement = f"{LET} {MUT} {variate} = {exp}{SEMICOLON}"
         else:
@@ -137,18 +138,6 @@ class Lambda(Statement):
 
     def get(self):
         return self.lambda_statement
-
-
-# HACK: move to function_pod
-class Closure(Statement):
-    # {FN} {variate}{LEFT_PARENTHESIS}{inputs_dict}{RIGHT_PARENTHESIS} {RESULT} {res_type}{LEFT_BRACE} {exp} {
-    # RIGHT_BRACE} fn bar(x: Field) -> Field { x + 1 }
-    def __init__(self, variate, inputs_dict: dict, exp: list, res_type):
-        self.closure_statement = f"{FN} {variate}{LEFT_PARENTHESIS}{inputs_dict}{RIGHT_PARENTHESIS} " \
-                                 f"{RESULT} {res_type}{LEFT_BRACE} {exp} {RIGHT_BRACE}"
-
-    def get(self):
-        return self.closure_statement
 
 
 class Let_struct(Statement):

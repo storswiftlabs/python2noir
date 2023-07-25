@@ -52,7 +52,6 @@ def generate_body():
     body.append(l.get())
     # add return
     body.append(variate)
-    print(body)
     return body
 
 
