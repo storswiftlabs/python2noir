@@ -1,20 +1,20 @@
 from .sign import LESS_THAN, GREATER_THAN
 
 # Primitive type
-Int8 = 'i8'
-Int16 = 'i16'
-Int32 = 'i32'
-Int64 = 'i64'
-Int126 = 'i126'
-Uint8 = 'u8'
-Uint16 = 'u16'
-Uint32 = 'u32'
-Uint64 = 'u64'
-Uint126 = 'u126'
+INT8 = 'i8'
+INT16 = 'i16'
+INT32 = 'i32'
+INT64 = 'i64'
+INT126 = 'i126'
+UINT8 = 'u8'
+UINT16 = 'u16'
+UINT32 = 'u32'
+UINT64 = 'u64'
+UINT126 = 'u126'
 BoolType = 'bool'
 FIELD = 'Field'
 
-PRIMITIVE_TYPE = [Int8, Int16, Int32, Int64, Int126, Uint8, Uint16, Uint32, Uint64, Uint126, BoolType, FIELD]
+PRIMITIVE_TYPE = [INT8, INT16, INT32, INT64, INT126, UINT8, UINT16, UINT32, UINT64, UINT126, BoolType, FIELD]
 # Generics
 T = 'T'
 N = 'N'
