@@ -1,6 +1,9 @@
+from typing import Union, List
+
 from transpiler.core_module.struct_pod import Struct
 from transpiler.core_module.func_pod import Function
 from transpiler.core_module.statement_pod import Global
+from transpiler.others_module.import_package import Use, Mod
 
 
 class NoirContext:
@@ -15,6 +18,8 @@ class NoirContext:
         self.struct_list = []
         self.variates = dict()
         self.global_list = []
+        self.use_list = []
+        self.mod_list = []
 
     def add_struct(self, struct_name, name_and_type: dict):
         # Define a structure
@@ -46,6 +51,25 @@ class NoirContext:
         for global_variate in self.global_list:
             noir_lines.append(global_variate.get())
         return noir_lines
+
+    # TODO: There are too few operating methods for `use`
+    def add_use(self):
+        use = Use()
+        self.use_list.append(use)
+
+    def generate_use(self):
+        noir_list = []
+        for use_variate in self.use_list:
+            noir_list.append(use_variate.standard_library())
+
+    def add_mod(self, fn_name):
+        use = Mod(fn_name)
+        self.mod_list.append(use)
+
+    def generate_mod(self):
+        noir_list = []
+        for mod_variate in self.mod_list:
+            noir_list.append(mod_variate.get())
 
     def generate_noir_code_list(self, noir_name="main", fixed_number=1):
         # noir_lines = [f"// Fixed number is {fixed_number}\n"]
