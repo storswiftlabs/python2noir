@@ -24,7 +24,7 @@ class Let(Statement):
         # Get a line code statement
         self.variate = variate
         if is_mut:
-            self.let_mut_statement = f"{LET} mut {variate}: {variate_type} {ASSIGNMENT} {variate_body}{SEMICOLON}\n"
+            self.let_statement = f"{LET} mut {variate}: {variate_type} {ASSIGNMENT} {variate_body}{SEMICOLON}\n"
         else:
             self.let_statement = f"{LET} {variate}: {variate_type} {ASSIGNMENT} {variate_body}{SEMICOLON}\n"
 
