@@ -9,6 +9,9 @@ class test_func_pod(unittest.TestCase):
         body = ['x + y']
         result = Function("main", inputs_variate_and_type, 'Field', body).get()
         print(result)
+        self.assertTrue(result, """fn main(x : Field,y : Field,) -> pub Field {
+x + y
+}""")
 
     def test_FunctionGenerics(self):
         inputs_variate_and_type = {'x': array_type(T, N), 'y': T}

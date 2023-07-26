@@ -80,6 +80,7 @@ class test_statement_pod(unittest.TestCase):
         inputs = ('N', 'Field', 5)
         result = Global(inputs).get()
         print(result)
+        assert "global N : Field = 5;" == result
 
     def test_let_struct(self):
         struct_name = 'Animal'
@@ -87,5 +88,7 @@ class test_statement_pod(unittest.TestCase):
         struct = Struct(struct_name, struct_input_name_and_type)
         result = Let_struct(struct, 'octopus', 'get_octopus()').get()
         print(result)
+        assert "let octopus = Animal {hands: 2,legs: 3,eyes: 2,};" == result
         result = Let_struct(struct, 'octopus', 'get_octopus()').get_for_variate()
         print(result)
+        assert "let Animal {hands,legs,eyes} = get_octopus();" == result
