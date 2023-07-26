@@ -75,6 +75,10 @@ class NoirContext:
         # noir_lines = [f"// Fixed number is {fixed_number}\n"]
         noir_lines = [f"// Code generated from Python2Noir\n\n"]
         # Fill struct definition
+        for use in self.use_list:
+            noir_lines.append(use.standard_library())
+        for mod in self.mod_list:
+            noir_lines.append(mod.get())
         for variate in self.global_list:
             noir_lines.append(variate.get())
         for struct in self.struct_list:
