@@ -32,10 +32,10 @@ class Function(Func):
     def get(self):
         if self.result_type == '':
             return f"{FN} {self.fn_name}{LEFT_PARENTHESIS}{self.inputs_variate_and_type}{RIGHT_PARENTHESIS} " \
-                f"{LEFT_BRACE}\n{self.body}\n{RIGHT_BRACE}"
+                f"{LEFT_BRACE}\n{self.body}\n{RIGHT_BRACE}\n"
         else:
             return f"{FN} {self.fn_name}{LEFT_PARENTHESIS}{self.inputs_variate_and_type}{RIGHT_PARENTHESIS} " \
-               f"{RESULT} {PUB} {self.result_type} {LEFT_BRACE}\n{self.body}\n{RIGHT_BRACE}"
+               f"{RESULT} {PUB} {self.result_type} {LEFT_BRACE}\n{self.body}\n{RIGHT_BRACE}\n"
 
 
 class FunctionGenerics(Function):
@@ -63,7 +63,7 @@ class FunctionGenerics(Function):
             return super().get()
 
         return f"{FN} {self.fn_name}{self.generics_str}{LEFT_PARENTHESIS}{self.inputs_variate_and_type}" \
-               f"{RIGHT_PARENTHESIS} {RESULT} {PUB} {self.result_type} {LEFT_BRACE}\n{''.join(self.body)}\n{RIGHT_BRACE}"
+               f"{RIGHT_PARENTHESIS} {RESULT} {PUB} {self.result_type} {LEFT_BRACE}\n{''.join(self.body)}\n{RIGHT_BRACE}\n"
 
 
 class Closure(Func):

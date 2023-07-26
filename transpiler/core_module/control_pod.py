@@ -16,8 +16,8 @@ class If_control(Statement):
         self.body = body
 
     def get(self):
-        return f"{IF} {get_conditional(self.left_value, self.right_value, self.sign)} {LEFT_BRACE} \n{self.body}{SEMICOLON}\n" \
-               f"{RIGHT_BRACE}"
+        return f"{IF} {get_conditional(self.left_value, self.right_value, self.sign)} {LEFT_BRACE} \n{self.body}" \
+               f"{SEMICOLON}\n{RIGHT_BRACE}\n"
 
 
 class Elif_control(Statement):
@@ -25,8 +25,6 @@ class Elif_control(Statement):
     def __init__(self, left_value, right_value, sign, body):
         self.left_value = left_value
         self.right_value = right_value
-        if sign == ASSIGNMENT:
-            raise "Conditional statements cannot be '='"
         self.sign = sign
         self.body = body
 
@@ -34,7 +32,7 @@ class Elif_control(Statement):
         if self.body == '':
             return ''
         return f"{ELIF} {get_conditional(self.left_value, self.right_value, self.sign)}  " \
-               f"{LEFT_BRACE} \n{self.body}{SEMICOLON}\n{RIGHT_BRACE} "
+               f"{LEFT_BRACE} \n{self.body}{SEMICOLON}\n{RIGHT_BRACE}\n"
 
 
 class Else_control(Statement):
@@ -46,7 +44,7 @@ class Else_control(Statement):
             return ''
 
         return f"{ELSE} {LEFT_BRACE} " \
-               f"\n{self.body}{SEMICOLON}\n{RIGHT_BRACE} "
+               f"\n{self.body}{SEMICOLON}\n{RIGHT_BRACE}\n"
 
 
 class If_else_control(Statement):
@@ -58,5 +56,6 @@ class If_else_control(Statement):
         self.else_body = else_body
 
     def get(self):
+        # fixme: Line break issue waiting for processing
         return If_control(self.left_value, self.right_value, self.sign, self.if_body).get() + \
             " " + Else_control(self.else_body).get()
