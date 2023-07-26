@@ -24,9 +24,9 @@ class Let(Statement):
         # Get a line code statement
         self.variate = variate
         if is_mut:
-            self.let_mut_statement = f"{LET} mut {variate}: {variate_type} = {variate_body};"
+            self.let_mut_statement = f"{LET} mut {variate}: {variate_type} {ASSIGNMENT} {variate_body}{SEMICOLON}\n"
         else:
-            self.let_statement = f"{LET} {variate}: {variate_type} = {variate_body};"
+            self.let_statement = f"{LET} {variate}: {variate_type} {ASSIGNMENT} {variate_body}{SEMICOLON}\n"
 
     def get(self):
         # Get a line code statement
@@ -40,7 +40,7 @@ class Assert(Statement):
     # assert (array_eq([1, 2, 3], [1, 2, 3], | a, b | a == b));
 
     def __init__(self, conditional):
-        self.assert_statement = f"{ASSERT}{LEFT_PARENTHESIS}{conditional}{RIGHT_PARENTHESIS}{SEMICOLON}"
+        self.assert_statement = f"{ASSERT}{LEFT_PARENTHESIS}{conditional}{RIGHT_PARENTHESIS}{SEMICOLON}\n"
 
     def get(self):
         # Get a line code statement
@@ -53,8 +53,8 @@ class If_single_raw(Statement):
     # let (a, b) = if true { (0, 1) } else { (2, 3) };
     def __init__(self, variate, bool_exp, if_exp, else_exp):
         self.variate = variate
-        self.if_single_raw_statement = f"{LET} {variate} = {IF} {bool_exp} {LEFT_BRACE}{if_exp}{RIGHT_BRACE} {ELSE} " \
-                                       f"{LEFT_BRACE}{else_exp}{RIGHT_BRACE}{SEMICOLON}"
+        self.if_single_raw_statement = f"{LET} {variate} {ASSIGNMENT} {IF} {bool_exp} {LEFT_BRACE}{if_exp}{RIGHT_BRACE} {ELSE} " \
+                                       f"{LEFT_BRACE}{else_exp}{RIGHT_BRACE}{SEMICOLON}\n"
 
     def get(self):
         return self.if_single_raw_statement
@@ -66,9 +66,9 @@ class Tuple(Statement):
     def __init__(self, variate, exp, is_mut: bool):
         self.variate = variate
         if is_mut:
-            self.tuple_statement = f"{LET} {MUT} {variate} = {exp}{SEMICOLON}"
+            self.tuple_statement = f"{LET} {MUT} {variate} {ASSIGNMENT} {exp}{SEMICOLON}\n"
         else:
-            self.tuple_statement = f"{LET} {variate} = {exp}{SEMICOLON}"
+            self.tuple_statement = f"{LET} {variate} {ASSIGNMENT} {exp}{SEMICOLON}\n"
 
     def get(self):
         return self.tuple_statement
@@ -84,9 +84,9 @@ class Array(Statement):
         self.variate = variate
         variate = str(variate)
         if is_mut:
-            self.array_statement = f"{LET} {MUT} {variate} = {exp}{SEMICOLON}"
+            self.array_statement = f"{LET} {MUT} {variate} {ASSIGNMENT} {exp}{SEMICOLON}\n"
         else:
-            self.array_statement = f"{LET} {variate} = {exp}{SEMICOLON}"
+            self.array_statement = f"{LET} {variate} {ASSIGNMENT} {exp}{SEMICOLON}\n"
 
     def get(self):
         return self.array_statement
@@ -132,9 +132,9 @@ class Lambda(Statement):
     def __init__(self, variate, exp, is_mut: bool):
         self.variate = variate
         if is_mut:
-            self.lambda_statement = f"{LET} {MUT} {variate} = {exp}{SEMICOLON}"
+            self.lambda_statement = f"{LET} {MUT} {variate} {ASSIGNMENT} {exp}{SEMICOLON}"
         else:
-            self.lambda_statement = f"{LET} {variate} = {exp}{SEMICOLON}"
+            self.lambda_statement = f"{LET} {variate} {ASSIGNMENT} {exp}{SEMICOLON}"
 
     def get(self):
         return self.lambda_statement
@@ -173,14 +173,14 @@ class Let_struct(Statement):
         for key, value in self.struct.name_and_type.items():
             variate.append(key)
         return f"{LET} {self.struct.struct_name} {LEFT_BRACE}{','.join(variate)}{RIGHT_BRACE} {ASSIGNMENT} " \
-               f"{self.body}{SEMICOLON}"
+               f"{self.body}{SEMICOLON}\n"
 
 
 class Global(Statement):
 
     # 传入元组，或者数组
     def __init__(self, inputs: tuple):
-        self.global_variate = f"{GLOBAL} {inputs[0]} : {inputs[1]} = {inputs[2]}{SEMICOLON}\n"
+        self.global_variate = f"{GLOBAL} {inputs[0]} : {inputs[1]} {ASSIGNMENT} {inputs[2]}{SEMICOLON}\n"
 
     def get(self):
         return self.global_variate

@@ -27,11 +27,15 @@ class Function(Func):
             temp = key + " : " + value + ","
             self.inputs_variate_and_type += temp
         self.result_type = result_type
-        self.body = '\n'.join(body)
+        self.body = ''.join(body)
 
     def get(self):
-        return f"{FN} {self.fn_name}{LEFT_PARENTHESIS}{self.inputs_variate_and_type}{RIGHT_PARENTHESIS} " \
-               f"-> pub {self.result_type} {LEFT_BRACE}\n{''.join(self.body)}\n{RIGHT_BRACE}"
+        if self.result_type == '':
+            return f"{FN} {self.fn_name}{LEFT_PARENTHESIS}{self.inputs_variate_and_type}{RIGHT_PARENTHESIS} " \
+                f"{LEFT_BRACE}\n{self.body}\n{RIGHT_BRACE}"
+        else:
+            return f"{FN} {self.fn_name}{LEFT_PARENTHESIS}{self.inputs_variate_and_type}{RIGHT_PARENTHESIS} " \
+               f"{RESULT} {PUB} {self.result_type} {LEFT_BRACE}\n{self.body}\n{RIGHT_BRACE}"
 
 
 class FunctionGenerics(Function):
