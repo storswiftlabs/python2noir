@@ -9,7 +9,7 @@ class test_for_loop_pod(unittest.TestCase):
         variate = 'i'
         start_variate = '0'
         end_variate = '10'
-        body = 'sum += i'
+        body = 'sum += i;'
         result = ForLoop(variate, start_variate, end_variate, body).get()
         print(result)
         self.assertTrue(result, """for i in 0..10 { 
@@ -22,7 +22,7 @@ sum += i;
         arr_variate = 'arr'
         exp = [1, 2, 3, 4, 5]
         arr = Array(arr_variate, exp, False)
-        result = ForLoop(variate, start_variate, arr.array_len(), 'println(i)').get()
+        result = ForLoop(variate, start_variate, arr.array_len(), 'println(i);').get()
         print(result)
         self.assertTrue(result, """for i in 0..arr.len() { 
 println(i);
@@ -33,7 +33,7 @@ println(i);
         arr_variate = 'arr'
         exp = [1, 2, 3, 4, 5]
         arr = Array(arr_variate, exp, False)
-        result = ForLoop(variate, '', arr.variate, 'println(i)').get()
+        result = ForLoop(variate, '', arr.variate, 'println(i);').get()
         print(result)
         self.assertTrue(result, """for i in arr { 
 println(i); 
