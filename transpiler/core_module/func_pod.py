@@ -27,7 +27,7 @@ class Function(Func):
             temp = key + " : " + value + ","
             self.inputs_variate_and_type += temp
         self.result_type = result_type
-        self.body = ''.join(body)
+        self.body = '\n'.join(body)
 
     def get(self):
         if self.result_type == '':

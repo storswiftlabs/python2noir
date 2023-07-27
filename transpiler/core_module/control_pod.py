@@ -33,7 +33,7 @@ class IfElseControl(Statement):
                f"\n{self.if_body}\n" \
                f"{RIGHT_BRACE} {ELSE} {LEFT_BRACE}" \
                f"\n{self.else_body}\n" \
-               f"{RIGHT_BRACE}\n"
+               f"{RIGHT_BRACE}"
 
 
 class IfElifElseControl(Statement):
