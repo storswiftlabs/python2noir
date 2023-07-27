@@ -2,7 +2,7 @@ import unittest
 from transpiler.context.noir_context import NoirContext
 from transpiler.core_module.statement_pod import Let
 from transpiler.core_module.for_loop_pod import ForLoop
-from transpiler.core_module.control_pod import If_control
+from transpiler.core_module.control_pod import IfControl
 from transpiler.sub_module.primitive_type import UINT32, custom_type, INT64
 from transpiler.sub_module.sign import LESS_THAN
 from transpiler.utils.utils import table_format_control
@@ -62,11 +62,11 @@ class test_context(unittest.TestCase):
         body.append(let_temp)
 
         sign = LESS_THAN
-        control_1 = If_control('e1', 'temp', sign, "temp = e1;\noutput = 1").get()
+        control_1 = IfControl('e1', 'temp', sign, "temp = e1;\noutput = 1").get()
         body.append(control_1)
-        control_2 = If_control('e2', 'temp', sign, "temp = e2;\noutput = 2").get()
+        control_2 = IfControl('e2', 'temp', sign, "temp = e2;\noutput = 2").get()
         body.append(control_2)
-        control_3 = If_control('e3', 'temp', sign, "temp = e3;\noutput = 3").get()
+        control_3 = IfControl('e3', 'temp', sign, "temp = e3;\noutput = 3").get()
         body.append(control_3)
 
         body.append('output')

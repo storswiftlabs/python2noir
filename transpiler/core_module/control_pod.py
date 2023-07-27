@@ -7,7 +7,7 @@ def get_conditional(left_value, right_value, sign):
     return f"{left_value} {sign} {right_value}"
 
 
-class If_control(Statement):
+class IfControl(Statement):
 
     def __init__(self, left_value, right_value, sign, body):
         self.left_value = left_value
@@ -17,37 +17,10 @@ class If_control(Statement):
 
     def get(self):
         return f"{IF} {get_conditional(self.left_value, self.right_value, self.sign)} {LEFT_BRACE} \n{self.body}" \
-               f"{SEMICOLON}\n{RIGHT_BRACE}\n"
+               f"\n{RIGHT_BRACE}\n"
 
 
-class Elif_control(Statement):
-
-    def __init__(self, left_value, right_value, sign, body):
-        self.left_value = left_value
-        self.right_value = right_value
-        self.sign = sign
-        self.body = body
-
-    def get(self):
-        if self.body == '':
-            return ''
-        return f"{ELIF} {get_conditional(self.left_value, self.right_value, self.sign)}  " \
-               f"{LEFT_BRACE} \n{self.body}{SEMICOLON}\n{RIGHT_BRACE}\n"
-
-
-class Else_control(Statement):
-    def __init__(self, body):
-        self.body = body
-
-    def get(self):
-        if self.body == '':
-            return ''
-
-        return f"{ELSE} {LEFT_BRACE} " \
-               f"\n{self.body}{SEMICOLON}\n{RIGHT_BRACE}\n"
-
-
-class If_else_control(Statement):
+class IfElseControl(Statement):
     def __init__(self, left_value, right_value, sign, if_body, else_body):
         self.left_value = left_value
         self.right_value = right_value
@@ -55,7 +28,17 @@ class If_else_control(Statement):
         self.if_body = if_body
         self.else_body = else_body
 
+    def get(self) -> str:
+        return f"{IF} {get_conditional(self.left_value, self.right_value, self.sign)} {LEFT_BRACE}" \
+               f"\n{self.if_body}\n" \
+               f"{RIGHT_BRACE} {ELSE} {LEFT_BRACE}" \
+               f"\n{self.else_body}\n" \
+               f"{RIGHT_BRACE}\n"
+
+
+class IfElifElseControl(Statement):
+    def __init__(self):
+        pass
+
     def get(self):
-        # fixme: Line break issue waiting for processing
-        return If_control(self.left_value, self.right_value, self.sign, self.if_body).get() + \
-            " " + Else_control(self.else_body).get()
+        pass
