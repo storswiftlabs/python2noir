@@ -178,7 +178,6 @@ class Let_struct(Statement):
 
 class Global(Statement):
 
-    # 传入元组，或者数组
     def __init__(self, inputs: tuple):
         self.global_variate = f"{GLOBAL} {inputs[0]} : {inputs[1]} {ASSIGNMENT} {inputs[2]}{SEMICOLON}"
 

@@ -25,7 +25,6 @@ class test_context(unittest.TestCase):
     }""")
 
     def test_generate_noir(self):
-
         context = NoirContext()
         array_type = '[i64;6]'
         variate = 'sum'
@@ -42,7 +41,7 @@ class test_context(unittest.TestCase):
         let = Let(variate, INT64, 0, True).get()
         body.append(let)
 
-        for_loop = ForLoop('index', 0, 5, 'sum += (point[index] - inputs[index]) *  (point[index] - inputs[index])')\
+        for_loop = ForLoop('index', 0, 5, 'sum += (point[index] - inputs[index]) *  (point[index] - inputs[index])') \
             .get()
         body.append(for_loop)
 
@@ -129,18 +128,6 @@ fn main(inputs : [i64;6],point0 : [i64;6],point1 : [i64;6],point2 : [i64;6],poin
 	check_min(e0,e1,e2,e3)
 }
 """
-
-
-def generate_body():
-    body = []
-    variate = 'a'
-    variate_type = UINT32
-    variate_body = '9'
-    let = Let(variate, variate_type, variate_body, False)
-    body.append(let.get())
-    # add return
-    body.append(variate)
-    return body
 
 
 if __name__ == '__main__':

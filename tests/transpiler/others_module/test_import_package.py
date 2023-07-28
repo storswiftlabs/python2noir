@@ -9,9 +9,9 @@ class test_import_package(unittest.TestCase):
         self.assertTrue(mod, "mod test;")
 
     def test_Use(self):
-        use = Use().standard_library()
-        print(use)
-        self.assertTrue(use, "use dep::std;")
+        use = Use()
+        print(use.standard_library)
+        self.assertTrue(use.standard_library, "use dep::std;")
 
 
 if __name__ == '__main__':

@@ -53,14 +53,15 @@ class NoirContext:
         return noir_lines
 
     # TODO: There are too few operating methods for `use`
-    def add_use(self):
+    def add_use(self, use_statement):
         use = Use()
-        self.use_list.append(use)
+        use.define_custom_use(use_statement)
+        self.use_list.append(use.custom_use)
 
     def generate_use(self):
         noir_list = []
         for use_variate in self.use_list:
-            noir_list.append(use_variate.standard_library())
+            noir_list.append(use_variate)
 
     def add_mod(self, fn_name):
         use = Mod(fn_name)
@@ -72,11 +73,10 @@ class NoirContext:
             noir_list.append(mod_variate.get())
 
     def generate_noir_code_list(self, noir_name="main", fixed_number=1):
-        noir_lines = [f"// Code generated from Python2Noir\n"]
-        noir_lines.append(f"// Fixed number is {fixed_number}\n\n")
+        noir_lines = [f"// Code generated from Python2Noir\n", f"// Fixed number is {fixed_number}\n\n"]
         # Fill struct definition
         for use in self.use_list:
-            noir_lines.append(use.standard_library())
+            noir_lines.append(use)
         for mod in self.mod_list:
             noir_lines.append(mod.get())
         for variate in self.global_list:

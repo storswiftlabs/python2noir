@@ -12,11 +12,10 @@ class Mod(Statement):
 
 
 class Use:
-    def standard_library(self):
-        return f"{USE} {DEP_STD}{SEMICOLON}\n"
+    custom_use = ""
+    def __init__(self):
+        self.standard_library = f"{USE} {DEP_STD}{SEMICOLON}\n"
+        self.standard_library_println = f"{USE} {DEP_STD_PRINTLN}{SEMICOLON}\n"
 
-    def standard_library_println(self):
-        return f"{USE} {DEP_STD_PRINTLN}{SEMICOLON}\n"
-
-    def custom_use(self, use):
-        return f"{USE} {use}{SEMICOLON}\n"
+    def define_custom_use(self, use):
+        self.custom_use = f"{USE} {use}{SEMICOLON}\n"
