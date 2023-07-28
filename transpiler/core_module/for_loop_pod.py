@@ -11,7 +11,7 @@ class ForLoop(Statement):
                             f" {LEFT_BRACE} \n{body}\n{RIGHT_BRACE}\n"
         else:
             self.for_loop = f"{FOR} {variate} {IN} {start_variate}..{end_variate}" \
-                            f" {LEFT_BRACE} \n{body}\n{RIGHT_BRACE}\n"
+                            f" {LEFT_BRACE} \n{body}\n{RIGHT_BRACE}"
 
     def get(self):
         return self.for_loop

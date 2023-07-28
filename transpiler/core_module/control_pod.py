@@ -17,7 +17,7 @@ class IfControl(Statement):
 
     def get(self):
         return f"{IF} {get_conditional(self.left_value, self.right_value, self.sign)} {LEFT_BRACE} \n{self.body}" \
-               f"\n{RIGHT_BRACE}\n"
+               f"\n{RIGHT_BRACE}"
 
 
 class IfElseControl(Statement):

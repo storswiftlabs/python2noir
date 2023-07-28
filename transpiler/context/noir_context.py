@@ -72,8 +72,8 @@ class NoirContext:
             noir_list.append(mod_variate.get())
 
     def generate_noir_code_list(self, noir_name="main", fixed_number=1):
-        # noir_lines = [f"// Fixed number is {fixed_number}\n"]
-        noir_lines = [f"// Code generated from Python2Noir\n\n"]
+        noir_lines = [f"// Code generated from Python2Noir\n"]
+        noir_lines.append(f"// Fixed number is {fixed_number}\n\n")
         # Fill struct definition
         for use in self.use_list:
             noir_lines.append(use.standard_library())
