@@ -9,9 +9,10 @@ class test_func_pod(unittest.TestCase):
         body = ['x + y']
         result = Function("main", inputs_variate_and_type, 'Field', body).get()
         print(result)
-        self.assertTrue(result, """fn main(x : Field,y : Field,) -> pub Field {
+        assert result == """fn main(x : Field,y : Field,) -> pub Field {
 x + y
-}""")
+}
+"""
 
     def test_FunctionGenerics(self):
         inputs_variate_and_type = {'x': array_type(T, N), 'y': T}
@@ -21,7 +22,8 @@ x + y
         print("Function Generics:", my_function_generics.get())
         assert my_function_generics.get() == """fn bar<T, N>(x : [T; N],y : T,) -> pub Field {
 x[0] + y
-}"""
+}
+"""
 
     def test_FunctionGenerics_impl_struct(self):
         inputs_variate_and_type = {'x': array_type(T, N), 'y': T}
@@ -30,7 +32,8 @@ x[0] + y
         print("Function Generics:", my_function_generics.get())
         assert my_function_generics.get() == """fn bar(x : [T; N],y : T,) -> pub Field {
 x[0] + y
-}"""
+}
+"""
 
 
 if __name__ == '__main__':

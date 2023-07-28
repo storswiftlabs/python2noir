@@ -89,9 +89,11 @@ weight: u16,
         assert my_struct.impl_struct_fn(impl_list) == """impl Dataset { 
 fn some_fn1(self : Self,) -> pub Field {
 self.bar + self.baz[0] + self.baz[1]
-}fn some_fn2(self : Self,) -> pub Field {
+}
+fn some_fn2(self : Self,) -> pub Field {
 self.bar + self.baz[0] + self.baz[1]
-}}
+}
+}
 """
 
     def test_impl_struct_fn_generics(self):
@@ -108,7 +110,9 @@ self.bar + self.baz[0] + self.baz[1]
         assert my_struct.impl_struct_fn(impl_list) == """impl<T, N> Dataset<T, N> { 
 fn some_fn1(self : Self,) -> pub Field {
 self.bar + self.baz[0] + self.baz[1]
-}fn some_fn2(self : Self,) -> pub Field {
+}
+fn some_fn2(self : Self,) -> pub Field {
 self.bar + self.baz[0] + self.baz[1]
-}}
+}
+}
 """
