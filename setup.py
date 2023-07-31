@@ -6,5 +6,5 @@ setuptools.setup(
     description='Easy to quickly convert python libraries to Noir contracts',
     author='storswift',
     author_email='',
-    packages=['transpiler'],
+    packages=setuptools.find_packages(),
 )
