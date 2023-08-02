@@ -20,7 +20,22 @@ Easy to quickly convert python libraries to Noir contracts
 - Python 3.7+
 - Anaconda
 
-## Usage
+## Import package
+```shell
+# linux
+pip install setuptools
+git clone https://github.com/storswiftlabs/python2noir.git
+python setup.py sdist
+pip install ./dist/python2noir-0.1.tar.gz
+# windows
+pip install setuptools
+git clone https://github.com/storswiftlabs/python2noir.git
+python setup.py bdist_wininst
+# execute exe file
+./python2noir-0.1.win-amd64.exe
+```
+
+## Example
 
 ```shell
 # clone repository 
