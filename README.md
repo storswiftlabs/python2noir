@@ -21,13 +21,16 @@ Easy to quickly convert python libraries to Noir contracts
 - Anaconda
 
 ## Import package
+
+### linux
 ```shell
-# linux
 pip install setuptools
 git clone https://github.com/storswiftlabs/python2noir.git
 python setup.py sdist
 pip install ./dist/python2noir-0.1.tar.gz
-# windows
+```
+### windows
+```shell
 pip install setuptools
 git clone https://github.com/storswiftlabs/python2noir.git
 python setup.py bdist_wininst
