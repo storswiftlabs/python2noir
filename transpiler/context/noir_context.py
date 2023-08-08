@@ -3,6 +3,7 @@ from typing import Union, List
 from transpiler.core_module.struct_pod import Struct
 from transpiler.core_module.func_pod import Function
 from transpiler.core_module.statement_pod import Global
+from transpiler.others_module import Annotation
 from transpiler.others_module.import_package import Use, Mod
 
 
@@ -20,6 +21,7 @@ class NoirContext:
         self.global_list = []
         self.use_list = []
         self.mod_list = []
+        self.annotations = []
 
     def add_struct(self, struct_name, name_and_type: dict):
         # Define a structure
@@ -62,6 +64,7 @@ class NoirContext:
         noir_list = []
         for use_variate in self.use_list:
             noir_list.append(use_variate)
+        return noir_list
 
     def add_mod(self, fn_name):
         use = Mod(fn_name)
@@ -71,9 +74,21 @@ class NoirContext:
         noir_list = []
         for mod_variate in self.mod_list:
             noir_list.append(mod_variate.get())
+        return noir_list
+
+    def add_annotation(self, line, content):
+        annotation = Annotation(line, content)
+        self.annotations.append(annotation)
+
+    def append_annotation(self, noir_lines: list):
+        for annotation_obj in self.annotations:
+            noir_lines.insert(annotation_obj.line, annotation_obj.get_content())
+        return noir_lines
 
     def generate_noir_code_list(self, noir_name="main", fixed_number=1):
-        noir_lines = [f"// Code generated from Python2Noir\n", f"// Fixed number is {fixed_number}\n\n"]
+        self.add_annotation(0, "Code generated from Python2Noir")
+        self.add_annotation(1, f"Fixed number is {fixed_number}")
+        noir_lines = []
         # Fill struct definition
         for use in self.use_list:
             noir_lines.append(use)
@@ -86,5 +101,5 @@ class NoirContext:
         # Fill function
         for func in self.function_list:
             noir_lines.append(func.get())
+        noir_lines = self.append_annotation(noir_lines)
         return noir_lines
-
