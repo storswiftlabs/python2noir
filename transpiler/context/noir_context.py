@@ -106,7 +106,7 @@ class NoirContext:
         for mod in self.mod_list:
             noir_lines.append(mod.get())
         for variate in self.global_list:
-            noir_lines.append(variate.get())
+            noir_lines.append(variate.get()+'\n')
         for struct in self.struct_list:
             noir_lines.append(struct.generate_noir_struct())
         # Fill function
