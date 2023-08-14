@@ -72,6 +72,9 @@ class test_context(unittest.TestCase):
 
         context.add_function(fn_name, fn_inputs_name_and_type, fn_result, body)
 
+        context.add_function_generics(
+            fn_name, fn_inputs_name_and_type, fn_result, body, generics_type=True, generics_num=True)
+
         # add main function
         fn_name = 'main'
         fn_inputs_name_and_type = {'inputs': array_type, 'point0': array_type, 'point1': array_type,
@@ -92,10 +95,10 @@ class test_context(unittest.TestCase):
 
         context.add_function(fn_name, fn_inputs_name_and_type, fn_result, body)
 
+
         noir_code = context.generate_noir_code_list()
         print(''.join(table_format_control(noir_code)))
         assert ''.join(table_format_control(noir_code)) == """// Code generated from Python2Noir
-// Fixed number is 1
 fn obtainEuclideanDistance(inputs : [i64;6],point : [i64;6],) -> pub i64 {
 	let mut sum: i64 = 0;
 	for index in 0..5 { 
@@ -104,6 +107,23 @@ fn obtainEuclideanDistance(inputs : [i64;6],point : [i64;6],) -> pub i64 {
 	sum
 }
 fn check_min(e0 : i64,e1 : i64,e2 : i64,e3 : i64,) -> pub u3 {
+	let mut output: u3 = 0;
+	let mut temp: i64 = e0;
+	if e1 < temp { 
+		temp = e1;
+		output = 1
+	}
+	if e2 < temp { 
+		temp = e2;
+		output = 2
+	}
+	if e3 < temp { 
+		temp = e3;
+		output = 3
+	}
+	output
+}
+fn check_min<T, N>(e0 : i64,e1 : i64,e2 : i64,e3 : i64,) -> pub u3 {
 	let mut output: u3 = 0;
 	let mut temp: i64 = e0;
 	if e1 < temp { 
